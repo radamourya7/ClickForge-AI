@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { ChevronLeft, Sparkles, Send, Copy, Check, FileText, Zap, MessageSquare, Camera, Edit3, Heart, User } from 'lucide-react';
 import api from '../utils/api';
-import AdPlaceholder from '../components/AdPlaceholder';
 
 const ToolDetails = () => {
     const { toolId } = useParams();

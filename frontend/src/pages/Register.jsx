@@ -89,9 +89,6 @@ const Register = () => {
                     </Link>
                 </div>
             </div>
-            <div className="mt-12 w-full max-w-4xl">
-                <AdPlaceholder type="banner" />
-            </div>
         </div>
     );
 };

@@ -4,7 +4,7 @@ import { Sparkles, GraduationCap, PenTool, LayoutGrid, FileText, Share2, Calcula
 import { Helmet } from 'react-helmet-async';
 import Hero from '../components/Hero';
 import ToolCard from '../components/ToolCard';
-import AdPlaceholder from '../components/AdPlaceholder';
+import ToolCard from '../components/ToolCard';
 
 const Home = () => {
     const tools = {
@@ -60,10 +60,6 @@ const Home = () => {
                     </div>
                 </section>
 
-                <div className="max-w-4xl mx-auto w-full">
-                    <AdPlaceholder type="banner" />
-                </div>
-
                 <section id="trending">
                     <div className="flex items-center gap-5 mb-16">
                         <div className="w-20 h-2 bg-lime-500 rounded-full"></div>
@@ -90,10 +86,6 @@ const Home = () => {
                         ))}
                     </div>
                 </section>
-
-                <div className="max-w-4xl mx-auto w-full">
-                    <AdPlaceholder type="native" />
-                </div>
 
                 <section id="viral-tools">
                     <h2 className="text-6xl font-black mb-16 flex items-center gap-6 italic bebas uppercase">

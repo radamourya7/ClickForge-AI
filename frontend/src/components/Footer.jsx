@@ -1,11 +1,6 @@
-import AdPlaceholder from './AdPlaceholder';
-
 const Footer = () => {
     return (
         <footer className="border-t border-white/10 py-12 px-6 mt-20 bg-slate-950">
-            <div className="max-w-7xl mx-auto mb-12">
-                <AdPlaceholder type="native" />
-            </div>
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
                 <div className="col-span-1 md:col-span-2">
                     <h3 className="text-xl font-bold mb-4">ClickForge AI</h3>
