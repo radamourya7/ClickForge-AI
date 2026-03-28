@@ -41,11 +41,21 @@ app.get('/', (req, res) => {
     res.send('ClickForge AI API is running...');
 });
 
-// Database Connection
+// Start Server first to satisfy Render's port binding requirement
 const PORT = process.env.PORT || 5000;
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => {
-        console.log('MongoDB Connected');
-        app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-    })
-    .catch(err => console.error('MongoDB Connection Error:', err));
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+
+    // Connect to Database after server starts
+    if (!process.env.MONGO_URI) {
+        console.error('FATAL: MONGO_URI is not defined in environment variables.');
+        return;
+    }
+
+    mongoose.connect(process.env.MONGO_URI)
+        .then(() => console.log('MongoDB Connected'))
+        .catch(err => {
+            console.error('MongoDB Connection Error:', err.message);
+            console.log('Ensure your Render IP is whitelisted in MongoDB Atlas or use 0.0.0.0/0');
+        });
+});
