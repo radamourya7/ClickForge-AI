@@ -5,7 +5,7 @@ const SchemaSource = () => {
     const softwareSchema = {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
-        "name": "ClickForge AI",
+        "name": "Sigma AI",
         "operatingSystem": "All",
         "applicationCategory": "EducationalApplication",
         "aggregateRating": {

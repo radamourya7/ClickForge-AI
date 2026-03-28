@@ -10,7 +10,7 @@ const Navbar = () => {
                     <Zap size={24} className="text-white fill-current" />
                 </div>
                 <span className="text-xl font-bold tracking-tight">
-                    ClickForge <span className="gradient-text">AI</span>
+                    Sigma <span className="gradient-text">AI</span>
                 </span>
             </Link>
 

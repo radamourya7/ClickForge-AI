@@ -6,7 +6,7 @@ const generateAIResult = async (req, res) => {
         const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
         const model = genAI.getGenerativeModel({
             model: 'gemini-1.5-flash',
-            systemInstruction: "You are the ClickForge AI Engine, a professional, highly intelligent, and helpful assistant designed for students and creators. Your goal is to provide 'up-to-the-point', viral, and high-quality results. Always maintain a professional yet engaging tone."
+            systemInstruction: "You are the Sigma AI Engine, a professional, highly intelligent, and helpful assistant designed for students and creators. Your goal is to provide 'up-to-the-point', viral, and high-quality results. Always maintain a professional yet engaging tone."
         });
 
         let prompt = '';
@@ -58,10 +58,10 @@ const generateAIResult = async (req, res) => {
             
             ROBOTIC TEXT:
             ${input}`;
-        } else if (toolName === 'ClickForge Chat') {
-            prompt = `You are the primary assistant for the ClickForge AI platform. Answer this query professionally and helpfully: ${input}`;
+        } else if (toolName === 'Sigma Chat') {
+            prompt = `You are the primary assistant for the Sigma AI platform. Answer this query professionally and helpfully: ${input}`;
         } else {
-            prompt = `Process this request as a specialized module of ClickForge AI: ${input}`;
+            prompt = `Process this request as a specialized module of Sigma AI: ${input}`;
         }
 
         if (!process.env.GEMINI_API_KEY || process.env.GEMINI_API_KEY === 'your_key_here' || !process.env.GEMINI_API_KEY.startsWith('AIza')) {

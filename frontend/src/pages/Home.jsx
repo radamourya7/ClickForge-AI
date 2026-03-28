@@ -31,9 +31,9 @@ const Home = () => {
     return (
         <div className="max-w-5xl mx-auto px-6 relative">
             <Helmet>
-                <title>ClickForge AI | Unleash Your Academic Weapon 🧠💪</title>
+                <title>Sigma AI | Unleash Your Academic Weapon 🧠💪</title>
                 <meta name="description" content="The ultimate AI toolkit for students. AI Plagiarism Humanizer, Resume Weapon, Lecture Crusher, and Viral Rizz Generators. No cap, just gains." />
-                <link rel="canonical" href="https://clickforge.ai/" />
+                <link rel="canonical" href="https://sigma-ai.vercel.app/" />
             </Helmet>
 
             <Hero />
@@ -48,11 +48,11 @@ const Home = () => {
                             </div>
                             <div>
                                 <h3 className="font-black text-4xl tracking-tighter uppercase italic bebas">The Daily Feed</h3>
-                                <p className="text-xl text-[var(--text-secondary)] font-bold italic tracking-tight uppercase">"Sigma students use ClickForge. Be a Sigma." 🐺💪</p>
+                                <p className="text-xl text-[var(--text-secondary)] font-bold italic tracking-tight uppercase">"Sigma students use Sigma AI. Be a Sigma." 🐺💪</p>
                             </div>
                         </div>
                         <div className="flex gap-3">
-                            {['#AcademicWeapon', '#ClickForge', '#NoCap'].map(tag => (
+                            {['#AcademicWeapon', '#SigmaAI', '#NoCap'].map(tag => (
                                 <span key={tag} className="px-6 py-2 glass rounded-full text-[10px] font-black text-lime-500 border-lime-500/30 uppercase tracking-[0.3em]">{tag}</span>
                             ))}
                         </div>

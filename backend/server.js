@@ -50,7 +50,7 @@ app.use('/api/stats', require('./routes/stats'));
 
 // Root
 app.get('/', (req, res) => {
-    res.send('ClickForge AI API is running...');
+    res.send('Sigma AI API is running...');
 });
 
 // Start Server first to satisfy Render's port binding requirement

@@ -5,7 +5,7 @@ const MemeTicker = () => {
     const memes = [
         "POV: You're an Academic Weapon 🧠💪",
         "GPA goes brrrrrr 📈",
-        "Me when ClickForge AI handles my assignments: 🧊🥶",
+        "Me when Sigma AI handles my assignments: 🧊🥶",
         "POV: You found the secret tool for 4.0 GPA 🤫",
         "Absolute Unit of Productivity 😤",
         "Brain Rot: 0% | Productivity: 100% 🚀",
