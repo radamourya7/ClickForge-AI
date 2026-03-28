@@ -1,41 +1,49 @@
-import { motion } from 'framer-motion';
-import { Sparkles, ArrowRight } from 'lucide-react';
+import React from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { Zap, FireExtinguisher, Trophy, Heart } from 'lucide-react';
 
 const Hero = () => {
+    const { scrollY } = useScroll();
+    const y1 = useTransform(scrollY, [0, 500], [0, 200]);
+    const y2 = useTransform(scrollY, [0, 500], [0, -150]);
+
     return (
-        <div className="relative pt-20 pb-16 overflow-hidden">
-            {/* Background Decorative Circles */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/10 blur-[120px] rounded-full -z-10"></div>
+        <section className="relative pt-32 pb-24 overflow-hidden">
+            {/* Parallax Stickers */}
+            <motion.div style={{ y: y1 }} className="absolute top-20 left-[10%] text-6xl opacity-30 sticker">🔥</motion.div>
+            <motion.div style={{ y: y2 }} className="absolute top-40 right-[15%] text-7xl opacity-30 sticker">🧠</motion.div>
+            <motion.div style={{ y: y1 }} className="absolute bottom-20 left-[20%] text-5xl opacity-20 sticker">💀</motion.div>
+            <motion.div style={{ y: y2 }} className="absolute top-1/2 right-[10%] text-6xl opacity-30 sticker">🧊</motion.div>
 
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="text-center"
-            >
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm font-medium text-blue-400 mb-8">
-                    <Sparkles size={16} /> <span>New: AI Resume Analyzer is out!</span>
-                </div>
+            <div className="relative z-10 text-center px-6">
+                <motion.div
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    className="inline-flex items-center gap-2 px-6 py-2 rounded-full glass border-lime-500/20 text-lime-500 dark:text-lime-400 text-xs font-black mb-10 uppercase tracking-[0.3em]"
+                >
+                    <Trophy size={16} /> UNLEASH THE VIBE
+                </motion.div>
 
-                <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
-                    All-in-One Free <br />
-                    <span className="gradient-text">AI & Student Tools</span>
+                <h1 className="text-7xl md:text-[10rem] font-black mb-8 tracking-tighter leading-none italic uppercase text-[var(--text-primary)]">
+                    ACADEMIC <br />
+                    <span className="gradient-text italic">WEAPONRY</span>
                 </h1>
 
-                <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-10">
-                    Supercharge your productivity with AI-powered notes, resume checkers, and viral content generators. Build for the future of students and creators.
+                <p className="text-[var(--text-secondary)] text-xl md:text-2xl max-w-2xl mx-auto mb-12 font-bold tracking-tight">
+                    POV: You found the tool that makes GPA go brrrrr. <br className="hidden md:block" /> No cap, just high-diff AI.
                 </p>
 
-                <div className="flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="#ai-tools" className="px-8 py-4 rounded-full bg-white text-black font-bold hover:bg-slate-200 transition-colors flex items-center justify-center gap-2">
-                        Explore Tools <ArrowRight size={20} />
-                    </a>
-                    <a href="/register" className="px-8 py-4 rounded-full glass font-bold hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
-                        Premium Upgrade
+                <div className="flex flex-wrap items-center justify-center gap-8">
+                    <Link to="/register" className="group relative px-10 py-5 bg-[var(--text-primary)] text-[var(--bg-color)] rounded-[2rem] text-2xl font-black hover:scale-105 hover:shadow-[0_0_50px_rgba(204,255,0,0.3)] transition-all flex items-center gap-4 overflow-hidden">
+                        GET GAINS <Zap size={24} className="fill-current" />
+                    </Link>
+                    <a href="#trending" className="text-xs font-black uppercase tracking-[0.4em] hover:text-lime-500 transition-colors flex items-center gap-2">
+                        THE TOOLS <FireExtinguisher size={16} />
                     </a>
                 </div>
-            </motion.div>
-        </div>
+            </div>
+        </section>
     );
 };
 

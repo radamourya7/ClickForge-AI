@@ -1,57 +1,98 @@
 @import "tailwindcss";
 
+@theme {
+  --color-brand-blue: #00ffff;
+  --color-brand-lime: #ccff00;
+  --color-brand-pink: #ff00ff;
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
+  --bg-color: #f8fafc;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --card-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+  --accent-glow: rgba(0, 255, 255, 0.2);
+
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #0f172a;
+  color: var(--text-primary);
+  background-color: var(--bg-color);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark {
+  --bg-color: #050510;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0ff;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(10, 10, 30, 0.7);
+  --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  --accent-glow: rgba(255, 0, 255, 0.3);
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  display: block;
   min-width: 320px;
   min-height: 100vh;
 }
 
-#root {
-  width: 100%;
+h1,
+.bebas {
+  font-family: 'Bebas Neue', sans-serif;
 }
 
 .glass {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 30px var(--accent-glow);
+  border-color: var(--color-brand-blue);
 }
 
 .gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-cyan-400 to-lime-400 animate-gradient-x;
 }
 
-@layer utilities {
-  .animate-slow-fade {
-    animation: fade-in 1s ease-in-out;
+.dark .gradient-text {
+  @apply from-pink-500 via-purple-400 to-blue-400;
+}
+
+@keyframes gradient-x {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
   }
 }
 
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 5s ease infinite;
+}
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.sticker {
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
 }

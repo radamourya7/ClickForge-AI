@@ -1,153 +1,33 @@
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { ChevronLeft, Share2, Copy, Download, Star, Info } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { copyToClipboard } from '../utils/clipboard';
+import { ChevronLeft, Sparkles, Send, Copy, Check, FileText, Zap, MessageSquare, Camera, Edit3, Heart, User } from 'lucide-react';
+import api from '../utils/api';
 import AdPlaceholder from '../components/AdPlaceholder';
-import { trackToolClick } from '../utils/api';
-
-// Simple Tool Result Component
-const ResultCard = ({ title, content, onCopy }) => (
-    <div className="mt-8 p-6 bg-white/5 border border-white/10 rounded-2xl animate-slow-fade">
-        <div className="flex justify-between items-center mb-4">
-            <h4 className="font-bold text-blue-400">{title}</h4>
-            <button
-                onClick={() => onCopy(content)}
-                className="p-2 hover:bg-white/10 rounded-lg transition-colors text-slate-400 hover:text-white"
-                title="Copy to Clipboard"
-            >
-                <Copy size={18} />
-            </button>
-        </div>
-        <div className="text-slate-200 whitespace-pre-wrap text-sm leading-relaxed">
-            {content}
-        </div>
-    </div>
-);
-
-const InternshipTracker = () => {
-    const internships = [
-        { title: 'Software Engineering Intern (Summer 2026)', company: 'Google', location: 'Bangalore / Hyderabad', deadline: 'Open Now', link: 'https://www.google.com/about/careers/applications/students/', tags: ['Big Tech', 'Paid'] },
-        { title: 'Product Design Intern', company: 'Atlassian', location: 'Remote (India)', deadline: 'Apply Soon', link: 'https://www.atlassian.com/company/careers/interns', tags: ['Design', 'Remote'] },
-        { title: 'SDE Intern 2026', company: 'Amazon', location: 'Chennai / Gurgaon', deadline: 'Batch 2026', link: 'https://www.amazon.jobs/en/teams/university-recruiting', tags: ['SDE', 'Top Tier'] },
-        { title: 'Frontend Developer Intern', company: 'Vercel', location: 'Remote Global', deadline: 'Ongoing', link: 'https://vercel.com/careers', tags: ['Staging', 'Global'] },
-        { title: 'Data Science Intern', company: 'Microsoft', location: 'Noida / Remote', deadline: 'Spring 2026', link: 'https://careers.microsoft.com/students/us/en', tags: ['AI', 'Data'] },
-        { title: 'Full Stack Developer', company: 'Razorpay', location: 'Bangalore', deadline: 'Immediate', link: 'https://razorpay.com/jobs/', tags: ['Fintech', 'Fast-paced'] },
-    ];
-
-    return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {internships.map((job, index) => (
-                <div key={index} className="group p-6 bg-white/5 border border-white/10 rounded-3xl hover:bg-white/10 hover:border-blue-500/30 transition-all duration-300 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <ArrowRight size={20} className="text-blue-400" />
-                    </div>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                        {job.tags.map(tag => (
-                            <span key={tag} className="px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-400 text-[10px] font-bold uppercase tracking-wider">
-                                {tag}
-                            </span>
-                        ))}
-                    </div>
-                    <h3 className="font-bold text-xl mb-1 group-hover:text-blue-400 transition-colors uppercase tracking-tight">{job.title}</h3>
-                    <p className="text-slate-400 text-sm mb-4 flex items-center gap-2">
-                        <span className="font-semibold text-white/80">{job.company}</span>
-                        <span className="w-1 h-1 bg-slate-600 rounded-full"></span>
-                        {job.location}
-                    </p>
-                    <div className="flex justify-between items-center mt-auto pt-4 border-t border-white/5">
-                        <span className="text-xs text-slate-500 font-medium">Deadline: <span className="text-slate-300">{job.deadline}</span></span>
-                        <a href={job.link} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-white/5 hover:bg-blue-600 rounded-xl text-xs font-bold text-white transition-all">
-                            Apply Now
-                        </a>
-                    </div>
-                </div>
-            ))}
-        </div>
-    );
-};
-
-const CGPACalculator = ({ onCalculate }) => {
-    const [rows, setRows] = useState([{ grade: 'A', credits: 3 }]);
-
-    const addRow = () => setRows([...rows, { grade: 'A', credits: 3 }]);
-    const updateRow = (index, field, value) => {
-        const newRows = [...rows];
-        newRows[index][field] = value;
-        setRows(newRows);
-    };
-
-    const calculate = () => {
-        const gradePoints = { 'A': 10, 'A-': 9, 'B': 8, 'B-': 7, 'C': 6, 'D': 4, 'F': 0 };
-        let totalPoints = 0;
-        let totalCredits = 0;
-        rows.forEach(row => {
-            totalPoints += (gradePoints[row.grade] || 0) * Number(row.credits);
-            totalCredits += Number(row.credits);
-        });
-        const gpa = (totalPoints / totalCredits).toFixed(2);
-        onCalculate(`YOUR CALCULATED GPA: ${gpa}\nTotal Credits: ${totalCredits}\nTotal Grade Points: ${totalPoints}`);
-    };
-
-    return (
-        <div className="space-y-4">
-            {rows.map((row, index) => (
-                <div key={index} className="flex gap-4">
-                    <select
-                        value={row.grade}
-                        onChange={(e) => updateRow(index, 'grade', e.target.value)}
-                        className="flex-grow bg-slate-900/50 border border-white/10 rounded-xl p-3 text-white outline-none"
-                    >
-                        {['A', 'A-', 'B', 'B-', 'C', 'D', 'F'].map(g => <option key={g} value={g}>{g}</option>)}
-                    </select>
-                    <input
-                        type="number"
-                        value={row.credits}
-                        onChange={(e) => updateRow(index, 'credits', e.target.value)}
-                        placeholder="Credits"
-                        className="w-24 bg-slate-900/50 border border-white/10 rounded-xl p-3 text-white outline-none"
-                    />
-                </div>
-            ))}
-            <div className="flex gap-4 pt-4">
-                <button onClick={addRow} className="flex-grow py-3 border border-white/10 rounded-xl hover:bg-white/5 transition-all">
-                    + Add Subject
-                </button>
-                <button onClick={calculate} className="flex-grow py-3 bg-blue-600 rounded-xl font-bold hover:bg-blue-500 transition-all">
-                    Calculate GPA
-                </button>
-            </div>
-        </div>
-    );
-};
 
 const ToolDetails = () => {
     const { toolId } = useParams();
     const [input, setInput] = useState('');
-    const [result, setResult] = useState(null);
+    const [result, setResult] = useState('');
     const [loading, setLoading] = useState(false);
+    const [copied, setCopied] = useState(false);
 
-    // Tool Data
-    const toolsInfo = {
-        'resume-analyzer': { title: 'ATS Resume Checker', desc: 'Score your resume against industry standards.', placeholder: 'Paste your resume text here...', category: 'AI' },
-        'notes-summarizer': { title: 'AI Notes Summarizer', desc: 'Convert long text into key bullet points.', placeholder: 'Paste your long notes or article here...', category: 'AI' },
-        'insta-bio': { title: 'Instagram Bio Generator', desc: 'Create a viral bio based on your personality.', placeholder: 'Describe yourself or your business...', category: 'Viral' },
-        'caption-gen': { title: 'Viral Caption Generator', desc: 'Engaging captions for social media.', placeholder: 'What is your post about?', category: 'Viral' },
-        'pickup-lines': { title: 'AI Pickup Lines', desc: 'Smooth lines for any situation.', placeholder: 'Give us a theme (e.g., tech, coffee, gym)...', category: 'Viral' },
-        'word-counter': { title: 'Smart Word Counter', desc: 'Analyze text length and readability.', placeholder: 'Type or paste text...', category: 'Utility' },
-        'cgpa-calc': { title: 'CGPA Calculator', desc: 'Calculate your academic standing.', category: 'Student', isSpecial: true },
-        'internships': { title: 'Internship Tracker', desc: 'Latest opportunities from top tech companies.', category: 'Student', isSpecial: true },
+    const toolMetadata = {
+        'humanizer': { id: 'humanizer', title: 'AI Plagiarism Humanizer', description: 'Transform AI-generated text into 100% human-sounding content that bypasses AI detectors.', icon: User, colorClass: 'from-blue-600 to-indigo-600' },
+        'resume-analyzer': { id: 'resume-analyzer', title: 'ATS Resume Checker', description: 'Analyze your resume against job descriptions with AI.', icon: FileText, colorClass: 'from-purple-600 to-blue-600' },
+        'notes-summarizer': { id: 'notes-summarizer', title: 'AI Notes Summarizer', description: 'Transform long lectures into concise bullet points.', icon: Zap, colorClass: 'from-orange-500 to-red-500' },
+        'chat-assistant': { id: 'chat-assistant', title: 'ClickForge Chat', description: 'AI assistant for all your study and productivity needs.', icon: MessageSquare, colorClass: 'from-blue-500 to-emerald-500' },
+        'insta-bio': { id: 'insta-bio', title: 'Instagram Bio Gen', description: 'Create viral Instagram bios that convert visitors.', icon: Camera, colorClass: 'from-pink-600 to-orange-500' },
+        'caption-gen': { id: 'caption-gen', title: 'Viral Caption Gen', description: 'Generate engaging captions for TikTok, Insta, and FB.', icon: Edit3, colorClass: 'from-emerald-400 to-cyan-500' },
+        'pickup-lines': { id: 'pickup-lines', title: 'AI Pickup Lines', description: 'Witty and smooth lines generated by AI.', icon: Heart, colorClass: 'from-red-600 to-pink-400' },
     };
 
-    const currentTool = toolsInfo[toolId] || { title: 'Tool Not Found', desc: 'This tool is coming soon!', category: 'Utility' };
+    const currentTool = toolMetadata[toolId] || toolMetadata['chat-assistant'];
 
-    const handleAction = async () => {
-        if (!input) return;
+    const handleGenerate = async () => {
+        if (!input.trim()) return;
         setLoading(true);
-
-        // Track usage in backend
-        trackToolClick(currentTool.title, currentTool.category);
-
         try {
             const apiResponse = await api.post('/tools/ai', {
                 toolName: currentTool.title,
@@ -155,104 +35,97 @@ const ToolDetails = () => {
             });
             setResult(apiResponse.data.result);
         } catch (err) {
-            console.error('AI Error:', err);
-            // Fallback for demo if API is down or not configured
-            setTimeout(() => {
-                let output = '';
-                if (toolId === 'resume-analyzer') {
-                    output = `ATS SCORE: 85/100\n\nStrengths:\n- Clean formatting\n- Good use of action verbs\n\nImprovements Needed:\n- Add more industry keywords\n- Quantify achievements more clearly`;
-                } else if (toolId === 'word-counter') {
-                    const words = input.trim().split(/\s+/).length;
-                    const chars = input.length;
-                    output = `Word Count: ${words}\nCharacter Count: ${chars}\nReadability: High`;
-                } else if (toolId === 'notes-summarizer') {
-                    output = `SUMMARY:\n1. Main concept explained clearly.\n2. Supporting evidence identified.\n3. Conclusion summarized in one sentence.`;
-                } else {
-                    output = `This is a generated ${currentTool.title} result for: "${input.substring(0, 20)}..."\n\nClickForge AI is processing your request. Connect your Gemini API Key in backend/.env for real results!`;
-                }
-                setResult(output);
-            }, 1000);
+            setResult('Error generating AI result. Please check your API key.');
         } finally {
             setLoading(false);
         }
     };
 
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(result);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    };
+
     return (
         <div className="max-w-4xl mx-auto px-6 py-12">
             <Helmet>
-                <title>{currentTool.title} | ClickForge AI Tools</title>
-                <meta name="description" content={currentTool.desc} />
+                <title>{currentTool.title} | ClickForge AI 🧠💪</title>
+                <meta name="description" content={currentTool.description} />
+                <meta property="og:title" content={`${currentTool.title} - ClickForge AI`} />
+                <meta property="og:description" content={currentTool.description} />
                 <link rel="canonical" href={`https://clickforge.ai/tool/${toolId}`} />
             </Helmet>
-            <Link to="/" className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors mb-8 w-fit">
-                <ChevronLeft size={20} /> Back to Dashboard
+
+            <Link to="/" className="inline-flex items-center gap-2 text-slate-500 hover:text-blue-500 transition-colors mb-8 font-bold uppercase text-xs tracking-widest">
+                <ChevronLeft size={16} /> Back to Dashboard
             </Link>
 
-            <div className="bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 glass">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
+            <div className="glass rounded-[2.5rem] p-10 relative overflow-hidden">
+                <div className={`absolute top-0 right-0 w-64 h-64 bg-gradient-to-br ${currentTool.colorClass} opacity-10 blur-[80px] pointer-events-none`}></div>
+
+                <div className="flex items-center gap-6 mb-10 relative z-10">
+                    <div className={`w-20 h-20 rounded-3xl flex items-center justify-center p-5 bg-gradient-to-br ${currentTool.colorClass} shadow-2xl`}>
+                        <currentTool.icon size={40} className="text-white" />
+                    </div>
                     <div>
-                        <h1 className="text-3xl md:text-4xl font-bold mb-2">{currentTool.title}</h1>
-                        <p className="text-slate-400">{currentTool.desc}</p>
-                    </div>
-                    <div className="flex gap-2">
-                        <button className="p-3 glass rounded-xl text-slate-300 hover:text-white transition-all">
-                            <Share2 size={20} />
-                        </button>
-                        <button className="p-3 glass rounded-xl text-slate-300 hover:text-white transition-all">
-                            <Star size={20} />
-                        </button>
+                        <h1 className="text-4xl font-black tracking-tight uppercase italic">{currentTool.title}</h1>
+                        <p className="text-[var(--text-secondary)] font-medium italic">Powered by ClickForge AI Engine</p>
                     </div>
                 </div>
 
-                <div className="space-y-6">
-                    {currentTool.isSpecial ? (
-                        toolId === 'cgpa-calc' ? (
-                            <CGPACalculator onCalculate={setResult} />
-                        ) : (
-                            <InternshipTracker />
-                        )
-                    ) : (
-                        <>
-                            <div>
-                                <label className="block text-sm font-medium text-slate-400 mb-2">Your Input</label>
-                                <textarea
-                                    value={input}
-                                    onChange={(e) => setInput(e.target.value)}
-                                    placeholder={currentTool.placeholder}
-                                    className="w-full h-48 bg-slate-900/50 border border-white/10 rounded-2xl p-4 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none resize-none"
-                                ></textarea>
-                            </div>
+                <div className="space-y-6 relative z-10">
+                    <div className="space-y-2">
+                        <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-2">Input Content</label>
+                        <textarea
+                            value={input}
+                            onChange={(e) => setInput(e.target.value)}
+                            placeholder={`Paste your content here for ${currentTool.title}...`}
+                            className="w-full h-48 bg-black/5 dark:bg-white/5 border border-white/10 rounded-3xl p-6 focus:ring-2 focus:ring-blue-500/50 outline-none transition-all resize-none text-lg font-medium"
+                        />
+                    </div>
 
-                            <button
-                                onClick={handleAction}
-                                disabled={loading || !input}
-                                className={`w-full py-4 rounded-2xl font-bold text-lg transition-all flex items-center justify-center gap-2 
-                      ${loading ? 'bg-slate-800 cursor-not-allowed' : 'bg-gradient-to-r from-blue-600 to-emerald-500 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] hover:-translate-y-1'}`}
+                    <button
+                        onClick={handleGenerate}
+                        disabled={loading || !input.trim()}
+                        className="w-full py-5 bg-gradient-to-r from-blue-600 to-emerald-500 rounded-2xl text-xl font-black text-white hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+                    >
+                        {loading ? (
+                            <motion.div
+                                animate={{ rotate: 360 }}
+                                transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
                             >
-                                {loading ? (
-                                    <>
-                                        <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
-                                        Processing...
-                                    </>
-                                ) : (
-                                    'Forge Result'
-                                )}
-                            </button>
-                        </>
+                                <Zap size={24} />
+                            </motion.div>
+                        ) : (
+                            <>GENERATE MAGIC <Sparkles size={24} /></>
+                        )}
+                    </button>
+                </div>
+
+                <AnimatePresence>
+                    {result && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="mt-12 p-8 bg-blue-500/5 dark:bg-blue-400/5 border border-blue-500/20 rounded-3xl relative"
+                        >
+                            <div className="flex justify-between items-center mb-6">
+                                <span className="text-xs font-black uppercase tracking-widest text-blue-500">AI Human Result</span>
+                                <button
+                                    onClick={copyToClipboard}
+                                    className="p-2.5 rounded-xl glass hover:bg-blue-500/10 transition-all flex items-center gap-2 text-blue-500"
+                                >
+                                    {copied ? <Check size={18} /> : <Copy size={18} />}
+                                    <span className="text-xs font-black uppercase">Copy Result</span>
+                                </button>
+                            </div>
+                            <div className="prose prose-invert max-w-none whitespace-pre-wrap leading-relaxed font-medium">
+                                {result}
+                            </div>
+                        </motion.div>
                     )}
-                </div>
-
-                {result && (
-                    <ResultCard
-                        title="Generated Result"
-                        content={result}
-                        onCopy={copyToClipboard}
-                    />
-                )}
-
-                <div className="mt-8 flex items-center gap-2 text-[10px] text-slate-500 uppercase tracking-widest">
-                    <Info size={12} /> Results are generated by ClickForge AI Engine
-                </div>
+                </AnimatePresence>
             </div>
 
             <AdPlaceholder type="banner" />

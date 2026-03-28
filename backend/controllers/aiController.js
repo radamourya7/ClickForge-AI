@@ -50,6 +50,14 @@ const generateAIResult = async (req, res) => {
             
             THEME:
             ${input}`;
+        } else if (toolName === 'AI Plagiarism Humanizer') {
+            prompt = `As an expert editor and linguist, rewrite the following text to sound $100\%$ human. 
+            - Increase 'perplexity' and 'burstiness' by varying sentence lengths and structures.
+            - Use natural idioms, occasional soft transitions, and a conversational yet professional tone.
+            - Ensure it can bypass AI detection algorithms while maintaining the original meaning perfectly.
+            
+            ROBOTIC TEXT:
+            ${input}`;
         } else if (toolName === 'ClickForge Chat') {
             prompt = `You are the primary assistant for the ClickForge AI platform. Answer this query professionally and helpfully: ${input}`;
         } else {

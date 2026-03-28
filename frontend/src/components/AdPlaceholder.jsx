@@ -38,8 +38,8 @@ const AdPlaceholder = ({ type = 'banner' }) => {
     }, [type]);
 
     return (
-        <div className="w-full max-w-4xl mx-auto my-12 p-4 bg-white/5 rounded-3xl border border-dashed border-white/20 flex flex-col items-center justify-center min-h-[150px] overflow-hidden">
-            <span className="text-[10px] uppercase tracking-widest text-slate-500 mb-4">Sponsored Advertisement</span>
+        <div className="w-full max-w-4xl mx-auto my-12 p-4 glass rounded-3xl flex flex-col items-center justify-center min-h-[150px] overflow-hidden">
+            <span className="text-[10px] uppercase tracking-widest text-slate-400 mb-4 font-semibold">Sponsored Advertisement</span>
             <div id={`ad-container-${type}`} className="w-full flex justify-center"></div>
         </div>
     );
