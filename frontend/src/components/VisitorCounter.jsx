@@ -13,9 +13,8 @@ const VisitorCounter = () => {
                 const response = await api.get('/stats/visitors');
                 setCount(response.data.count);
             } catch (err) {
-                console.error('Failed to fetch visitor count');
-                // Mock count if API fails during local dev without DB
-                setCount(1337);
+                // Fallback to 0 if API fails
+                setCount(0);
             } finally {
                 setLoading(false);
             }
