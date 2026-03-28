@@ -27,22 +27,39 @@ const ResultCard = ({ title, content, onCopy }) => (
 
 const InternshipTracker = () => {
     const internships = [
-        { title: 'Frontend Developer Intern', company: 'Google', location: 'Remote', deadline: 'Apr 30, 2026', link: 'https://google.com/careers' },
-        { title: 'AI Research Intern', company: 'OpenAI', location: 'San Francisco, CA', deadline: 'May 15, 2026', link: 'https://openai.com/careers' },
-        { title: 'Software Engineer Intern', company: 'Microsoft', location: 'Seattle, WA', deadline: 'June 1, 2026', link: 'https://microsoft.com/careers' },
-        { title: 'Full Stack Intern', company: 'Stripe', location: 'Remote', deadline: 'May 20, 2026', link: 'https://stripe.com/jobs' },
-        { title: 'UI/UX Design Intern', company: 'Adobe', location: 'NYC', deadline: 'May 10, 2026', link: 'https://adobe.com/careers' },
+        { title: 'Software Engineering Intern (Summer 2026)', company: 'Google', location: 'Bangalore / Hyderabad', deadline: 'Open Now', link: 'https://www.google.com/about/careers/applications/students/', tags: ['Big Tech', 'Paid'] },
+        { title: 'Product Design Intern', company: 'Atlassian', location: 'Remote (India)', deadline: 'Apply Soon', link: 'https://www.atlassian.com/company/careers/interns', tags: ['Design', 'Remote'] },
+        { title: 'SDE Intern 2026', company: 'Amazon', location: 'Chennai / Gurgaon', deadline: 'Batch 2026', link: 'https://www.amazon.jobs/en/teams/university-recruiting', tags: ['SDE', 'Top Tier'] },
+        { title: 'Frontend Developer Intern', company: 'Vercel', location: 'Remote Global', deadline: 'Ongoing', link: 'https://vercel.com/careers', tags: ['Staging', 'Global'] },
+        { title: 'Data Science Intern', company: 'Microsoft', location: 'Noida / Remote', deadline: 'Spring 2026', link: 'https://careers.microsoft.com/students/us/en', tags: ['AI', 'Data'] },
+        { title: 'Full Stack Developer', company: 'Razorpay', location: 'Bangalore', deadline: 'Immediate', link: 'https://razorpay.com/jobs/', tags: ['Fintech', 'Fast-paced'] },
     ];
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {internships.map((job, index) => (
-                <div key={index} className="p-5 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 [transition-property:background,transform] duration-300">
-                    <h3 className="font-bold text-lg mb-1">{job.title}</h3>
-                    <p className="text-blue-400 text-sm mb-3">{job.company} • {job.location}</p>
-                    <div className="flex justify-between items-center bg-black/20 p-3 rounded-lg">
-                        <span className="text-xs text-slate-500">Starts: {job.deadline}</span>
-                        <a href={job.link} target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-emerald-400 hover:text-emerald-300">Apply Now →</a>
+                <div key={index} className="group p-6 bg-white/5 border border-white/10 rounded-3xl hover:bg-white/10 hover:border-blue-500/30 transition-all duration-300 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <ArrowRight size={20} className="text-blue-400" />
+                    </div>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                        {job.tags.map(tag => (
+                            <span key={tag} className="px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-400 text-[10px] font-bold uppercase tracking-wider">
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+                    <h3 className="font-bold text-xl mb-1 group-hover:text-blue-400 transition-colors uppercase tracking-tight">{job.title}</h3>
+                    <p className="text-slate-400 text-sm mb-4 flex items-center gap-2">
+                        <span className="font-semibold text-white/80">{job.company}</span>
+                        <span className="w-1 h-1 bg-slate-600 rounded-full"></span>
+                        {job.location}
+                    </p>
+                    <div className="flex justify-between items-center mt-auto pt-4 border-t border-white/5">
+                        <span className="text-xs text-slate-500 font-medium">Deadline: <span className="text-slate-300">{job.deadline}</span></span>
+                        <a href={job.link} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-white/5 hover:bg-blue-600 rounded-xl text-xs font-bold text-white transition-all">
+                            Apply Now
+                        </a>
                     </div>
                 </div>
             ))}
