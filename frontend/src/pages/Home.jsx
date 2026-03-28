@@ -4,7 +4,6 @@ import { Sparkles, GraduationCap, PenTool, LayoutGrid, FileText, Share2, Calcula
 import { Helmet } from 'react-helmet-async';
 import Hero from '../components/Hero';
 import ToolCard from '../components/ToolCard';
-import ToolCard from '../components/ToolCard';
 
 const Home = () => {
     const tools = {

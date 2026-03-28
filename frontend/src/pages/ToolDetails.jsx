@@ -126,9 +126,8 @@ const ToolDetails = () => {
                     )}
                 </AnimatePresence>
             </div>
-
-            <AdPlaceholder type="banner" />
         </div>
+        </div >
     );
 };
 
