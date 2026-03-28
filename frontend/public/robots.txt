@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://clickforge.ai/sitemap.xml
+
+Sitemap: https://sigmaaitools.netlify.app/sitemap.xml
