@@ -34,9 +34,9 @@ app.use(helmet({
     contentSecurityPolicy: {
         directives: {
             ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-            "script-src": ["'self'", "'unsafe-inline'", "*.profitablecpmratenetwork.com", "*.highperformanceformat.com"],
-            "frame-src": ["'self'", "*.profitablecpmratenetwork.com", "*.highperformanceformat.com"],
-            "img-src": ["'self'", "data:", "*.profitablecpmratenetwork.com", "*.highperformanceformat.com"],
+            "script-src": ["'self'", "'unsafe-inline'"],
+            "frame-src": ["'self'"],
+            "img-src": ["'self'", "data:"],
         },
     },
 }));
