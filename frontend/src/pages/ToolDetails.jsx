@@ -127,7 +127,6 @@ const ToolDetails = () => {
                 </AnimatePresence>
             </div>
         </div>
-        </div >
     );
 };
 

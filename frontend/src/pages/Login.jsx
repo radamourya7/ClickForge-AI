@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Lock, Zap } from 'lucide-react';
-import AdPlaceholder from '../components/AdPlaceholder';
 
 const Login = () => {
     const [email, setEmail] = useState('');
