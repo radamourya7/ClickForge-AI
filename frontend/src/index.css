@@ -4,6 +4,20 @@
   --color-brand-blue: #00ffff;
   --color-brand-lime: #ccff00;
   --color-brand-pink: #ff00ff;
+
+  --animate-gradient-x: gradient-x 5s ease infinite;
+
+  @keyframes gradient-x {
+
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+  }
 }
 
 :root {
@@ -67,28 +81,16 @@ h1,
 }
 
 .gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-cyan-400 to-lime-400 animate-gradient-x;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, #3b82f6, #22d3ee, #a3e635);
+  background-size: 200% 200%;
+  animation: gradient-x 5s ease infinite;
 }
 
 .dark .gradient-text {
-  @apply from-pink-500 via-purple-400 to-blue-400;
-}
-
-@keyframes gradient-x {
-
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-.animate-gradient-x {
-  background-size: 200% 200%;
-  animation: gradient-x 5s ease infinite;
+  background-image: linear-gradient(to right, #ec4899, #a78bfa, #3b82f6);
 }
 
 .sticker {
