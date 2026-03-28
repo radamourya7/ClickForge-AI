@@ -11,7 +11,7 @@ const Home = () => {
             { id: 'humanizer', title: 'AI Humanizer 👤✨', description: 'Bypass AI detectors with 100% human-diff energy.', icon: User, colorClass: 'from-blue-600 to-indigo-600', badge: 'FIRE' },
             { id: 'resume-analyzer', title: 'Resume Weapon 📄⚡', description: 'Turn your resume into a job-grabbing beast.', icon: FileText, colorClass: 'from-purple-600 to-blue-600', badge: 'TREND' },
             { id: 'notes-summarizer', title: 'Lecture Crusher 🧠💥', description: 'Lectures to bullet points in seconds. Ez.', icon: Zap, colorClass: 'from-orange-500 to-red-500' },
-            { id: 'chat-assistant', title: 'The Oracle 🔮', description: 'ClickForge Chat Assistant for all your problems.', icon: MessageSquare, colorClass: 'from-blue-500 to-emerald-500' },
+            { id: 'chat-assistant', title: 'The Oracle 🔮', description: 'Sigma Chat Assistant for all your problems.', icon: MessageSquare, colorClass: 'from-blue-500 to-emerald-500' },
         ],
         viral: [
             { id: 'insta-bio', title: 'Bio Ri$$ 📸💎', description: 'Instagram bios that make them click follow.', icon: Camera, colorClass: 'from-pink-600 to-orange-500', badge: 'GOAT' },
