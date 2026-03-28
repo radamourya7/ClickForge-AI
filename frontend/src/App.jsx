@@ -10,6 +10,7 @@ import { ThemeProvider } from './context/ThemeContext';
 import CustomCursor from './components/CustomCursor';
 import MemeTicker from './components/MemeTicker';
 import SchemaSource from './components/SchemaSource';
+import MovieHub from './components/MovieHub';
 
 const AnimatedRoutes = () => {
     const location = useLocation();
@@ -54,6 +55,7 @@ function App() {
                     </main>
                     <Footer />
                 </div>
+                <MovieHub />
             </Router>
         </ThemeProvider>
     );

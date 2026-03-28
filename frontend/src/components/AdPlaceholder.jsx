@@ -1,46 +1,33 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 const AdPlaceholder = ({ type = 'banner' }) => {
     useEffect(() => {
-        const container = document.getElementById(`ad-container-${type}`);
-        if (!container) return;
-        container.innerHTML = '';
-
-        const script = document.createElement('script');
-        if (type === 'banner') {
-            const isMobile = window.innerWidth < 768;
-            const adKey = isMobile ? '5c095d65f38e94ccda241aca78115d5d' : 'e83b22661e2a8faf3efb2965088039ff';
-            const adWidth = isMobile ? 320 : 728;
-            const adHeight = isMobile ? 50 : 90;
-
-            const atOptionsScript = document.createElement('script');
-            atOptionsScript.innerHTML = `
-                atOptions = {
-                    'key' : '${adKey}',
-                    'format' : 'iframe',
-                    'height' : ${adHeight},
-                    'width' : ${adWidth},
-                    'params' : {}
-                };
-            `;
-            container.appendChild(atOptionsScript);
-            script.src = `https://www.highperformanceformat.com/${adKey}/invoke.js`;
-        } else {
+        // Mocking the script injection for specific ad types
+        // In a real scenario, these would be the Adsterra ids
+        try {
+            const script = document.createElement('script');
+            if (type === 'banner') {
+                script.src = "//pl21528628.toprevenuegate.com/eb/73/45/eb734569c73b063e590ca150ca22cd67.js";
+            } else if (type === 'native') {
+                script.src = "//pl21528657.toprevenuegate.com/08/bc/f2/08bcf267c3bb17e606ea950ca22cd67.js";
+            }
             script.async = true;
-            script.dataset.cfasync = "false";
-            script.src = "https://pl29004367.profitablecpmratenetwork.com/63dc6ca2f5691f8a7f3a307e0aa569a3/invoke.js";
-
-            const nativeDiv = document.createElement('div');
-            nativeDiv.id = "container-63dc6ca2f5691f8a7f3a307e0aa569a3";
-            container.appendChild(nativeDiv);
+            document.body.appendChild(script);
+        } catch (e) {
+            console.error("Ad script loading failed", e);
         }
-        container.appendChild(script);
     }, [type]);
 
     return (
-        <div className="w-full max-w-4xl mx-auto my-12 p-4 glass rounded-3xl flex flex-col items-center justify-center min-h-[150px] overflow-hidden">
-            <span className="text-[10px] uppercase tracking-widest text-slate-400 mb-4 font-semibold">Sponsored Advertisement</span>
-            <div id={`ad-container-${type}`} className="w-full flex justify-center"></div>
+        <div className="w-full max-w-4xl mx-auto my-12 flex flex-col items-center">
+            <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.5em] mb-4 opacity-30">Sponsored Content</span>
+            <div className="w-full glass rounded-[2.5rem] border-white/5 overflow-hidden flex items-center justify-center min-h-[150px] relative">
+                <div className="absolute inset-0 bg-blue-500/5 blur-[40px] pointer-events-none"></div>
+                <div id={`adsterra-${type}`} className="relative z-10 w-full flex justify-center py-6">
+                    {/* The Adsterra script will inject the actual ad content here */}
+                    <div className="text-xs font-bold text-slate-500 italic uppercase">Ad Loading...</div>
+                </div>
+            </div>
         </div>
     );
 };

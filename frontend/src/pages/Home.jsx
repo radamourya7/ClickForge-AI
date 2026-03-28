@@ -30,91 +30,93 @@ const Home = () => {
     };
 
     return (
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-5xl mx-auto px-6 relative">
             <Helmet>
-                <title>ClickForge | Unleash Your Academic Weapon 🧠💪</title>
-                <meta name="description" content="The ultimate AI toolkit for students who want a 4.0 GPA with zero effort. No cap." />
+                <title>ClickForge AI | Unleash Your Academic Weapon 🧠💪</title>
+                <meta name="description" content="The ultimate AI toolkit for students. AI Plagiarism Humanizer, Resume Weapon, Lecture Crusher, and Viral Rizz Generators. No cap, just gains." />
+                <link rel="canonical" href="https://clickforge.ai/" />
             </Helmet>
 
             <Hero />
 
-            <section className="mb-20">
-                <div className="glass p-8 rounded-[3rem] border-lime-500/20 bg-gradient-to-r from-lime-500/10 to-transparent flex flex-wrap items-center justify-between gap-6 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-lime-500/20 blur-[60px] animate-pulse"></div>
-                    <div className="flex items-center gap-6">
-                        <div className="bg-lime-500 p-4 rounded-[1.5rem] animate-bounce shadow-[0_0_30px_rgba(204,255,0,0.5)]">
-                            <Flame size={32} className="text-black" />
+            <div className="space-y-32">
+                <section>
+                    <div className="glass p-8 rounded-[3rem] border-lime-500/20 bg-gradient-to-r from-lime-500/10 to-transparent flex flex-wrap items-center justify-between gap-6 relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-lime-500/20 blur-[60px] animate-pulse"></div>
+                        <div className="flex items-center gap-6">
+                            <div className="bg-lime-500 p-4 rounded-[1.5rem] animate-bounce shadow-[0_0_30px_rgba(204,255,0,0.5)]">
+                                <Flame size={32} className="text-black" />
+                            </div>
+                            <div>
+                                <h3 className="font-black text-4xl tracking-tighter uppercase italic bebas">The Daily Feed</h3>
+                                <p className="text-xl text-[var(--text-secondary)] font-bold italic tracking-tight uppercase">"Sigma students use ClickForge. Be a Sigma." 🐺💪</p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 className="font-black text-3xl tracking-tighter uppercase italic bebas">The Daily Feed</h3>
-                            <p className="text-lg text-[var(--text-secondary)] font-bold italic tracking-tight">"Sigma students use ClickForge. Be a Sigma." 🐺💪</p>
+                        <div className="flex gap-3">
+                            {['#AcademicWeapon', '#ClickForge', '#NoCap'].map(tag => (
+                                <span key={tag} className="px-6 py-2 glass rounded-full text-[10px] font-black text-lime-500 border-lime-500/30 uppercase tracking-[0.3em]">{tag}</span>
+                            ))}
                         </div>
                     </div>
-                    <div className="flex gap-3">
-                        {['#AcademicWeapon', '#ClickForge', '#NoCap'].map(tag => (
-                            <span key={tag} className="px-5 py-2 glass rounded-full text-xs font-black text-lime-500 border-lime-500/30 uppercase tracking-[0.2em]">{tag}</span>
+                </section>
+
+                <div className="max-w-4xl mx-auto w-full">
+                    <AdPlaceholder type="banner" />
+                </div>
+
+                <section id="trending">
+                    <div className="flex items-center gap-5 mb-16">
+                        <div className="w-20 h-2 bg-lime-500 rounded-full"></div>
+                        <h2 className="text-5xl font-black uppercase tracking-tighter italic bebas">The Arsenal</h2>
+                    </div>
+                    <motion.div
+                        initial="hidden"
+                        animate="show"
+                        className="grid grid-cols-1 md:grid-cols-2 gap-12"
+                    >
+                        {[...tools.ai, ...tools.viral].filter(t => t.badge).map(tool => (
+                            <ToolCard key={tool.id} {...tool} />
+                        ))}
+                    </motion.div>
+                </section>
+
+                <section id="ai-tools">
+                    <h2 className="text-6xl font-black mb-16 flex items-center gap-6 italic bebas uppercase">
+                        <Ghost size={56} className="text-blue-400" /> AI Weaponry
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                        {tools.ai.map(tool => (
+                            <ToolCard key={tool.id} {...tool} />
                         ))}
                     </div>
+                </section>
+
+                <div className="max-w-4xl mx-auto w-full">
+                    <AdPlaceholder type="native" />
                 </div>
-            </section>
 
-            <section id="trending" className="mt-28">
-                <div className="flex items-center gap-4 mb-14">
-                    <div className="w-16 h-1.5 bg-lime-500 rounded-full"></div>
-                    <h2 className="text-4xl font-black uppercase tracking-tighter italic bebas">The Arsenal</h2>
-                </div>
-                <motion.div
-                    initial="hidden"
-                    animate="show"
-                    variants={{
-                        hidden: { opacity: 0 },
-                        show: { opacity: 1, transition: { staggerChildren: 0.1 } }
-                    }}
-                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"
-                >
-                    {[...tools.ai, ...tools.viral].filter(t => t.badge).map(tool => (
-                        <ToolCard key={tool.id} {...tool} />
-                    ))}
-                </motion.div>
-            </section>
+                <section id="viral-tools">
+                    <h2 className="text-6xl font-black mb-16 flex items-center gap-6 italic bebas uppercase">
+                        <Rocket size={56} className="text-pink-500" /> Viral Gains
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                        {tools.viral.map(tool => (
+                            <ToolCard key={tool.id} {...tool} />
+                        ))}
+                    </div>
+                </section>
 
-            <AdPlaceholder type="banner" />
-
-            <section id="ai-tools" className="mt-32">
-                <h2 className="text-5xl font-black mb-14 flex items-center gap-5 italic bebas uppercase">
-                    <Ghost size={48} className="text-blue-400" /> AI Weaponry
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-                    {tools.ai.map(tool => (
-                        <ToolCard key={tool.id} {...tool} />
-                    ))}
-                </div>
-            </section>
-
-            <section id="viral-tools" className="mt-32">
-                <h2 className="text-5xl font-black mb-14 flex items-center gap-5 italic bebas uppercase">
-                    <Rocket size={48} className="text-pink-500" /> Viral Gains
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-                    {tools.viral.map(tool => (
-                        <ToolCard key={tool.id} {...tool} />
-                    ))}
-                </div>
-            </section>
-
-            <AdPlaceholder type="native" />
-
-            {/* General & Student sections simplified for length */}
-            <section id="student-tools" className="mt-32">
-                <h2 className="text-5xl font-black mb-14 flex items-center gap-5 italic bebas uppercase">
-                    <GraduationCap size={48} className="text-emerald-400" /> The Grind
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-                    {tools.student.map(tool => (
-                        <ToolCard key={tool.id} {...tool} />
-                    ))}
-                </div>
-            </section>
+                <section id="student-tools" className="mt-32 pb-32">
+                    <h2 className="text-6xl font-black mb-16 flex items-center gap-6 italic bebas uppercase">
+                        <GraduationCap size={56} className="text-emerald-400" /> The Grind
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12">
+                        {tools.student.map(tool => (
+                            <ToolCard key={tool.id} {...tool} />
+                        ))}
+                    </div>
+                </section>
+            </div>
         </div>
     );
 };
