@@ -1,3 +1,5 @@
+import VisitorCounter from './VisitorCounter';
+
 const Footer = () => {
     return (
         <footer className="border-t border-white/10 py-12 px-6 mt-20 bg-slate-950">
@@ -27,8 +29,11 @@ const Footer = () => {
                     </ul>
                 </div>
             </div>
-            <div className="max-w-7xl mx-auto border-t border-white/5 mt-12 pt-8 text-center text-slate-500 text-xs">
-                &copy; {new Date().getFullYear()} ClickForge AI. All rights reserved.
+            <div className="max-w-7xl mx-auto border-t border-white/5 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div className="text-slate-500 text-xs">
+                    &copy; {new Date().getFullYear()} ClickForge AI. All rights reserved.
+                </div>
+                <VisitorCounter />
             </div>
         </footer>
     );
