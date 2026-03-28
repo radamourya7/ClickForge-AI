@@ -17,7 +17,8 @@ const allowedOrigins = [
     'http://localhost:5173',
     'https://click-forge-ai-three.vercel.app',
     'https://click-forge-ai-git-main-radamourya7s-projects.vercel.app',
-    'https://click-forge-h5awvw33r-radamourya7s-projects.vercel.app'
+    'https://click-forge-h5awvw33r-radamourya7s-projects.vercel.app',
+    'https://sigmaaitools.netlify.app'
 ];
 
 app.use(cors({
