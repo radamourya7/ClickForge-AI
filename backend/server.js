@@ -15,7 +15,9 @@ app.use(express.json());
 const allowedOrigins = [
     process.env.CLIENT_URL,
     'http://localhost:5173',
-    'https://clickforge-ai.vercel.app' // Example Vercel URL
+    'https://click-forge-ai-three.vercel.app',
+    'https://click-forge-ai-git-main-radamourya7s-projects.vercel.app',
+    'https://click-forge-h5awvw33r-radamourya7s-projects.vercel.app'
 ];
 
 app.use(cors({
@@ -28,7 +30,16 @@ app.use(cors({
     },
     credentials: true
 }));
-app.use(helmet());
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+            "script-src": ["'self'", "'unsafe-inline'", "*.profitablecpmratenetwork.com", "*.highperformanceformat.com"],
+            "frame-src": ["'self'", "*.profitablecpmratenetwork.com", "*.highperformanceformat.com"],
+            "img-src": ["'self'", "data:", "*.profitablecpmratenetwork.com", "*.highperformanceformat.com"],
+        },
+    },
+}));
 app.use(morgan('dev'));
 app.use(cookieParser());
 

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Lock, Zap } from 'lucide-react';
+import AdPlaceholder from '../components/AdPlaceholder';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -68,6 +69,9 @@ const Login = () => {
                         Create one for free
                     </Link>
                 </div>
+            </div>
+            <div className="mt-12 w-full max-w-4xl">
+                <AdPlaceholder type="banner" />
             </div>
         </div>
     );

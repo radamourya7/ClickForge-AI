@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Lock, User, Zap } from 'lucide-react';
+import AdPlaceholder from '../components/AdPlaceholder';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -87,6 +88,9 @@ const Register = () => {
                         Sign In
                     </Link>
                 </div>
+            </div>
+            <div className="mt-12 w-full max-w-4xl">
+                <AdPlaceholder type="banner" />
             </div>
         </div>
     );
