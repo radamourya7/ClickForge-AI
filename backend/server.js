@@ -46,6 +46,7 @@ app.use(cookieParser());
 // Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/tools', require('./routes/tools'));
+app.use('/api/stats', require('./routes/stats'));
 
 // Root
 app.get('/', (req, res) => {
