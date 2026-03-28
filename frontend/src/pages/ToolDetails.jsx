@@ -53,7 +53,7 @@ const ToolDetails = () => {
                 <meta name="description" content={currentTool.description} />
                 <meta property="og:title" content={`${currentTool.title} - Sigma AI`} />
                 <meta property="og:description" content={currentTool.description} />
-                <link rel="canonical" href={`https://sigma-ai.vercel.app/tool/${toolId}`} />
+                <link rel="canonical" href={`https://sigmaaitools.netlify.app/tool/${toolId}`} />
             </Helmet>
 
             <Link to="/" className="inline-flex items-center gap-2 text-slate-500 hover:text-blue-500 transition-colors mb-8 font-bold uppercase text-xs tracking-widest">

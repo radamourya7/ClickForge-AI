@@ -33,7 +33,7 @@ const Home = () => {
             <Helmet>
                 <title>Sigma AI | Unleash Your Academic Weapon 🧠💪</title>
                 <meta name="description" content="The ultimate AI toolkit for students. AI Plagiarism Humanizer, Resume Weapon, Lecture Crusher, and Viral Rizz Generators. No cap, just gains." />
-                <link rel="canonical" href="https://sigma-ai.vercel.app/" />
+                <link rel="canonical" href="https://sigmaaitools.netlify.app/" />
             </Helmet>
 
             <Hero />
