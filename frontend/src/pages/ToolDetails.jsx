@@ -56,9 +56,19 @@ const ToolDetails = () => {
                 <link rel="canonical" href={`https://sigmaaitools.netlify.app/tool/${toolId}`} />
             </Helmet>
 
-            <Link to="/" className="inline-flex items-center gap-2 text-slate-500 hover:text-blue-500 transition-colors mb-8 font-bold uppercase text-xs tracking-widest">
-                <ChevronLeft size={16} /> Back to Dashboard
-            </Link>
+            <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+            >
+                <Link
+                    to="/"
+                    className="inline-flex items-center gap-3 px-6 py-3 glass rounded-2xl text-slate-400 hover:text-blue-500 hover:bg-blue-500/5 transition-all mb-10 font-bold uppercase text-[10px] tracking-widest border border-white/5 active:scale-95 group"
+                >
+                    <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+                    Back to Dashboard
+                </Link>
+            </motion.div>
 
             <div className="glass rounded-[2.5rem] p-10 relative overflow-hidden">
                 <div className={`absolute top-0 right-0 w-64 h-64 bg-gradient-to-br ${currentTool.colorClass} opacity-10 blur-[80px] pointer-events-none`}></div>
